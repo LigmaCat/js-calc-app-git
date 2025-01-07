@@ -28,6 +28,8 @@
             let num2Value = parseFloat(num2Input.value);
             let operatorValue = operatorInput.value;
 
+            let errorsArray = validateUserInput(num1Value, num2Value, operatorValue)
+
         let result = calculateResult(num1Value, num2Value, operatorValue)
 
     
@@ -54,6 +56,16 @@
                 break;
            }
            return result
+        }
+
+        function validateUserInput(n1, n2, op){
+            let errorArray = []
+
+            if(isNaN(n1))errorArray.push("Pirmais skaitlis ievadī nepareizi") ;
+            if(isNaN(n2))errorArray.push("Otrais skaitlis ievadī nepareizi");
+            if(isNaN(n1))errorArray.push("Operatīvs ievadīts nepareizi") ;
+
+            return errorArray
         }
     </script>
 </body>
