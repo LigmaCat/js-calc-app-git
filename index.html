@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator
-    </title>
+    <title>Calculator </title>
+    <style>
+        .success{
+            color: green
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <h1>Kalkulators</h1>
@@ -12,7 +20,7 @@
     <input type="text" id="operator">
     <input type="text" id="num2">
     <button id="btn">Rēķināt</button>
-    <div id="output"></div>
+    <div id="output" class="success"></div>
 
     <script>
         const num1Input  = document.getElementById("num1")
@@ -21,7 +29,7 @@
         const btnInput  = document.getElementById("btn")
         const outputContainer  = document.getElementById("output")
 
-        // const allowedOperator = ["+", "-", "*", "/"];
+        const allowedOperator = ["+", "-", "*", "/"];
 
         btnInput.addEventListener("click", handleClick)
 
@@ -74,27 +82,26 @@ let htmlFormatedErrors =
         }
 
         function validateUserInput(n1, n2, op){
-            let Ary = []
+            let errorAry = []
 
             if(isNaN(n1))Ary.push("Pirmais skaitlis ievadī nepareizi") ;
             if(isNaN(n2))Ary.push("Otrais skaitlis ievadī nepareizi");
 
             //does not work
-            // if (allowedOperator.includes(op)) ary.push("Ķļūdains Operators")
+            if (allowedOperator.includes(op)) ary.push("Ķļūdains Operators")
 
-            if (!["+", "-", "*", "/"].includes(op)) Ary.push("Operatīvs ievadīts nepareizi") ;
+            // if (!["+", "-", "*", "/"].includes(op)) Ary.push("Operatīvs ievadīts nepareizi") ;
 
 
-            return Ary
+            return errorAry
         }
-        function htmlFormatedErrors(errorAry){
+        function htmlFormatedErrors(errorsAry){
             let errorHtmlString = "";
             
-            for (let i = 0; i < errorAry.lenght; i++){
-                errorHtmlString +=  `<li>${errorAry[i]}</li>`
+            for (let i = 0; i < errorsAry.lenght; i++) {
+                errorHtmlString +=  `<li>${errorsAry[i]}</li>`
             }
 
-            // return "<ul>" + errorHtmlString + "</ul>"
             return `<ul>${errorHtmlString}</ul>`;
         }
     </script>
