@@ -20,7 +20,7 @@
     <input type="text" id="operator">
     <input type="text" id="num2">
     <button id="btn-calc">Rēķināt</button>
-    <button id="clear">clear</button>
+    <button id="btn-clear">Notīrīt</button>
 
     <div id="output" class="success"></div>
 
@@ -29,22 +29,17 @@
         const operatorInput  = document.getElementById("operator")
         const num2Input  = document.getElementById("num2")
         const btnCalc  = document.getElementById("btn-calc")
-        const btnClear  = document.getElementById("clear")
+        const btnClear  = document.getElementById("btn-clear")
         
         const outputContainer  = document.getElementById("output")
 
 
-        // const allowedOperator = ["+", "-", "*", "/"];
+        const allowedOperators = ["+", "-", "*", "/"];
 
         btnCalc.addEventListener("click", handleCalcClick)
         btnCalc.addEventListener("click", handleClearClick)
 
-        function handleClearClick(){
-            num1Input.value = "";
-            num2Input.value = "";
-            operatorInput.value = "";
-            outputContainer.innerHTML = "";
-        }
+       
 
         function handleCalcClick(){
 outputContainer.classList.remove("success", "error")
@@ -98,28 +93,35 @@ let htmlFormatedErrors = htmlFormatErrors
         }
 
         function validateUserInput(n1, n2, op){
-            let errorAry = []
+            let errorArray = []
 
-            if(isNaN(n1))Ary.push("Pirmais skaitlis ievadī nepareizi") ;
-            if(isNaN(n2))Ary.push("Otrais skaitlis ievadī nepareizi");
+            if(isNaN(n1)) errorArray.push("Pirmais skaitlis ievadī nepareizi") ;
+            if(isNaN(n2)) errorArray.push("Otrais skaitlis ievadī nepareizi");
 
             //does not work
-            // if (allowedOperator.includes(op)) ary.push("Ķļūdains Operators")
+            if (!allowedOperators.includes(op)) errorArray.push("Ķļūdains Operators")
 
-            if (!["+", "-", "*", "/"].includes(op)) Ary.push("Operatīvs ievadīts nepareizi") ;
+            // if (!["+", "-", "*", "/"].includes(op)) Ary.push("Operatīvs ievadīts nepareizi") ;
 
 
-            return errorAry
+            return errorArray
         }
-        function htmlFormatedErrors(errorsAry){
+        function htmlFormatErrors(errorsAry) {
             let errorHtmlString = "";
-            
-            for (let i = 0; i < errorsAry.lenght; i++) {
-                errorHtmlString +=  `<li>${errorsAry[i]}</li>`
+
+            for (let i = 0; i < errorsAry.length; i++) {
+                errorHtmlString += `<li>${errorsAry[i]}</li>`;
             }
 
             return `<ul>${errorHtmlString}</ul>`;
         }
+        // function handleClearClick(){
+        //     num1Input.value = "";
+        //     num2Input.value = "";
+        //     operatorInput.value = "";
+        //     outputContainer.innerHTML = "";
+        // }
+        
     </script>
 </body>
 </html>
