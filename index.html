@@ -29,11 +29,14 @@
         const btnInput  = document.getElementById("btn")
         const outputContainer  = document.getElementById("output")
 
-        const allowedOperator = ["+", "-", "*", "/"];
+        // const allowedOperator = ["+", "-", "*", "/"];
 
         btnInput.addEventListener("click", handleClick)
 
         function handleClick(){
+outputContainer.classList.remove("success", "error")
+// outputContainer.classList.toggle("error", true);
+
             let num1Value = parseFloat(num1Input.value);
             let num2Value = parseFloat(num2Input.value);
             let operatorValue = operatorInput.value;
@@ -45,18 +48,17 @@
                 )
 
 if (errorsArray.length > 0)  {
-
-let htmlFormatedErrors = 
-
- outputContainer.innerHTML = htmlFormatedErrors(errorsArray)
+    outputContainer.classList.toggle("error", true);
+let htmlFormatedErrors = outputContainer.innerHTML = htmlFormatedErrors(errorsArray)
 //  errorsArray.join("<br>");
  return;
 }
 
         let result = calculateResult(num1Value, num2Value, operatorValue)
+        outputContainer.classList.toggle("success", true);
 
     
-           outputContainer.innerHTML = result
+           outputContainer.innerHTML = `Rezultāts: ${result}`
         }
 
         function calculateResult(n1, n2, op){
@@ -88,9 +90,9 @@ let htmlFormatedErrors =
             if(isNaN(n2))Ary.push("Otrais skaitlis ievadī nepareizi");
 
             //does not work
-            if (allowedOperator.includes(op)) ary.push("Ķļūdains Operators")
+            // if (allowedOperator.includes(op)) ary.push("Ķļūdains Operators")
 
-            // if (!["+", "-", "*", "/"].includes(op)) Ary.push("Operatīvs ievadīts nepareizi") ;
+            if (!["+", "-", "*", "/"].includes(op)) Ary.push("Operatīvs ievadīts nepareizi") ;
 
 
             return errorAry
