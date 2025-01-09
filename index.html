@@ -21,6 +21,8 @@
         const btnInput  = document.getElementById("btn")
         const outputContainer  = document.getElementById("output")
 
+        // const allowedOperator = ["+", "-", "*", "/"];
+
         btnInput.addEventListener("click", handleClick)
 
         function handleClick(){
@@ -35,7 +37,11 @@
                 )
 
 if (errorsArray.length > 0)  {
- outputContainer.innerHTML = errorsArray.join("<br>");
+
+let htmlFormatedErrors = 
+
+ outputContainer.innerHTML = htmlFormatedErrors(errorsArray)
+//  errorsArray.join("<br>");
  return;
 }
 
@@ -72,9 +78,24 @@ if (errorsArray.length > 0)  {
 
             if(isNaN(n1))Ary.push("Pirmais skaitlis ievadī nepareizi") ;
             if(isNaN(n2))Ary.push("Otrais skaitlis ievadī nepareizi");
+
+            //does not work
+            // if (allowedOperator.includes(op)) ary.push("Ķļūdains Operators")
+
             if (!["+", "-", "*", "/"].includes(op)) Ary.push("Operatīvs ievadīts nepareizi") ;
 
+
             return Ary
+        }
+        function htmlFormatedErrors(errorAry){
+            let errorHtmlString = "";
+            
+            for (let i = 0; i < errorAry.lenght; i++){
+                errorHtmlString +=  `<li>${errorAry[i]}</li>`
+            }
+
+            // return "<ul>" + errorHtmlString + "</ul>"
+            return `<ul>${errorHtmlString}</ul>`;
         }
     </script>
 </body>
