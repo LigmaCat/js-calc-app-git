@@ -19,21 +19,34 @@
     <input type="text" id="num1">
     <input type="text" id="operator">
     <input type="text" id="num2">
-    <button id="btn">Rēķināt</button>
+    <button id="btn-calc">Rēķināt</button>
+    <button id="clear">clear</button>
+
     <div id="output" class="success"></div>
 
     <script>
         const num1Input  = document.getElementById("num1")
         const operatorInput  = document.getElementById("operator")
         const num2Input  = document.getElementById("num2")
-        const btnInput  = document.getElementById("btn")
+        const btnCalc  = document.getElementById("btn-calc")
+        const btnClear  = document.getElementById("clear")
+        
         const outputContainer  = document.getElementById("output")
+
 
         // const allowedOperator = ["+", "-", "*", "/"];
 
-        btnInput.addEventListener("click", handleClick)
+        btnCalc.addEventListener("click", handleCalcClick)
+        btnCalc.addEventListener("click", handleClearClick)
 
-        function handleClick(){
+        function handleClearClick(){
+            num1Input.value = "";
+            num2Input.value = "";
+            operatorInput.value = "";
+            outputContainer.innerHTML = "";
+        }
+
+        function handleCalcClick(){
 outputContainer.classList.remove("success", "error")
 // outputContainer.classList.toggle("error", true);
 
@@ -49,7 +62,8 @@ outputContainer.classList.remove("success", "error")
 
 if (errorsArray.length > 0)  {
     outputContainer.classList.toggle("error", true);
-let htmlFormatedErrors = outputContainer.innerHTML = htmlFormatedErrors(errorsArray)
+let htmlFormatedErrors = htmlFormatErrors
+ outputContainer.innerHTML = htmlFormatErrors(errorsArray)
 //  errorsArray.join("<br>");
  return;
 }
